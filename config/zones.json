@@ -1,37 +1,40 @@
 {
   "zones": [
     {
-      "zone_id": "zone_A",
-      "label": "Main Crowd Area",
-      "polygon": [
-        [50,  50],
-        [1270, 50],
-        [1270, 700],
-        [50,  700]
-      ],
-      "capacity": 15000
-    },
-    {
-      "zone_id": "zone_B",
-      "label": "Upper Right",
-      "polygon": [
-        [1280, 50],
-        [1870, 50],
-        [1870, 500],
-        [1280, 500]
-      ],
+      "zone_id": "zone_1",
+      "label": "Top Left",
+      "polygon": [[0, 0], [640, 0], [640, 540], [0, 540]],
       "capacity": 6000
     },
     {
-      "zone_id": "zone_C",
-      "label": "Lower Strip",
-      "polygon": [
-        [50,  720],
-        [1870, 720],
-        [1870, 1030],
-        [50,  1030]
-      ],
-      "capacity": 8000
+      "zone_id": "zone_2",
+      "label": "Top Center",
+      "polygon": [[640, 0], [1280, 0], [1280, 540], [640, 540]],
+      "capacity": 6000
+    },
+    {
+      "zone_id": "zone_3",
+      "label": "Top Right",
+      "polygon": [[1280, 0], [1920, 0], [1920, 540], [1280, 540]],
+      "capacity": 6000
+    },
+    {
+      "zone_id": "zone_4",
+      "label": "Bottom Left",
+      "polygon": [[0, 540], [640, 540], [640, 1080], [0, 1080]],
+      "capacity": 6000
+    },
+    {
+      "zone_id": "zone_5",
+      "label": "Bottom Center",
+      "polygon": [[640, 540], [1280, 540], [1280, 1080], [640, 1080]],
+      "capacity": 6000
+    },
+    {
+      "zone_id": "zone_6",
+      "label": "Bottom Right",
+      "polygon": [[1280, 540], [1920, 540], [1920, 1080], [1280, 1080]],
+      "capacity": 6000
     }
   ],
   "temporal": {
@@ -39,10 +42,10 @@
     "trend_window": 300
   },
   "anomaly": {
-    "sustained_density_threshold": 0.075,
+    "sustained_density_threshold": 0.01,
     "sustained_persistence_frames": 30,
-    "spike_roc_threshold": 0.002,
-    "drop_roc_threshold": -0.002,
+    "spike_roc_threshold": 0.0003,
+    "drop_roc_threshold": -0.0003,
     "spike_persist_frames": 2,
     "trend_slope_threshold": 0.00001,
     "trend_r_squared_threshold": 0.6

@@ -94,6 +94,9 @@ def main():
         # --- temporal update ---
         temporal.update(zone_results)
         temporal_states = temporal.get_all_states()
+        
+        for zone_id, state in temporal_states.items():
+            print(f"{zone_id} | smoothed: {state.smoothed_density:.6f} | roc: {state.rate_of_change:.6f}")
 
         # --- anomaly detection ---
         events = detector.evaluate(temporal_states, frame_number)
