@@ -1,0 +1,10 @@
+crowd_env/
+__pycache__/
+*.pyc
+output/
+assets/models/csrnet.xml
+assets/models/csrnet.bin
+assets/models/pretrained.pth
+assets/sample-video.mp4
+*.egg-info/
+.DS_Store
