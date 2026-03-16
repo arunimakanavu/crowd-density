@@ -4,37 +4,37 @@
       "zone_id": "zone_1",
       "label": "Top Left",
       "polygon": [[0, 0], [640, 0], [640, 540], [0, 540]],
-      "capacity": 6000
+      "capacity": 4000
     },
     {
       "zone_id": "zone_2",
       "label": "Top Center",
       "polygon": [[640, 0], [1280, 0], [1280, 540], [640, 540]],
-      "capacity": 6000
+      "capacity": 4000
     },
     {
       "zone_id": "zone_3",
       "label": "Top Right",
       "polygon": [[1280, 0], [1920, 0], [1920, 540], [1280, 540]],
-      "capacity": 6000
+      "capacity": 4000
     },
     {
       "zone_id": "zone_4",
       "label": "Bottom Left",
       "polygon": [[0, 540], [640, 540], [640, 1080], [0, 1080]],
-      "capacity": 6000
+      "capacity": 4000
     },
     {
       "zone_id": "zone_5",
       "label": "Bottom Center",
       "polygon": [[640, 540], [1280, 540], [1280, 1080], [640, 1080]],
-      "capacity": 6000
+      "capacity": 4000
     },
     {
       "zone_id": "zone_6",
       "label": "Bottom Right",
       "polygon": [[1280, 540], [1920, 540], [1920, 1080], [1280, 1080]],
-      "capacity": 6000
+      "capacity": 4000
     }
   ],
   "temporal": {
@@ -42,7 +42,7 @@
     "trend_window": 300
   },
   "anomaly": {
-    "sustained_density_threshold": 0.01,
+    "sustained_density_threshold": 0.008,
     "sustained_persistence_frames": 30,
     "spike_roc_threshold": 0.0003,
     "drop_roc_threshold": -0.0003,

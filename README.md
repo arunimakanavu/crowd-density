@@ -51,7 +51,7 @@ crowd-density/
 **1. Clone and create environment**
 
 ```bash
-git clone https://github.com/yourusername/crowd-density.git
+git clone https://github.com/arunimakanavu/crowd-density.git
 cd crowd-density
 python -m venv crowd_env
 source crowd_env/bin/activate
@@ -86,7 +86,7 @@ This generates `assets/models/csrnet.xml` and `assets/models/csrnet.bin`. PyTorc
 
 **5. Configure zones**
 
-Edit `config/zones.json` to define polygon zones that match your video's frame layout. The default polygons are for a 1920x1080 frame — adjust coordinates and capacity values for your scene.
+Edit `config/zones.json` to define polygon zones that match your video's frame layout. The default config divides a 1920×1080 frame into 6 equal zones (3 columns × 2 rows).
 
 To extract a reference frame:
 
@@ -119,22 +119,22 @@ All runtime parameters are in `config/zones.json`:
 ```json
 {
   "zones": [
-    {
-      "zone_id": "zone_A",
-      "label": "Main Crowd Area",
-      "polygon": [[50, 50], [1270, 50], [1270, 700], [50, 700]],
-      "capacity": 150
-    }
+    { "zone_id": "zone_1", "label": "Top Left",      "polygon": [[0,0],[640,0],[640,540],[0,540]],            "capacity": 6000 },
+    { "zone_id": "zone_2", "label": "Top Center",    "polygon": [[640,0],[1280,0],[1280,540],[640,540]],      "capacity": 6000 },
+    { "zone_id": "zone_3", "label": "Top Right",     "polygon": [[1280,0],[1920,0],[1920,540],[1280,540]],    "capacity": 6000 },
+    { "zone_id": "zone_4", "label": "Bottom Left",   "polygon": [[0,540],[640,540],[640,1080],[0,1080]],      "capacity": 6000 },
+    { "zone_id": "zone_5", "label": "Bottom Center", "polygon": [[640,540],[1280,540],[1280,1080],[640,1080]],"capacity": 6000 },
+    { "zone_id": "zone_6", "label": "Bottom Right",  "polygon": [[1280,540],[1920,540],[1920,1080],[1280,1080]],"capacity": 6000 }
   ],
   "temporal": {
     "short_window": 30,
     "trend_window": 300
   },
   "anomaly": {
-    "sustained_density_threshold": 0.005,
+    "sustained_density_threshold": 0.01,
     "sustained_persistence_frames": 30,
-    "spike_roc_threshold": 0.002,
-    "drop_roc_threshold": -0.002,
+    "spike_roc_threshold": 0.0003,
+    "drop_roc_threshold": -0.0003,
     "spike_persist_frames": 2,
     "trend_slope_threshold": 0.00001,
     "trend_r_squared_threshold": 0.6
@@ -142,7 +142,7 @@ All runtime parameters are in `config/zones.json`:
 }
 ```
 
-**Tuning note:** If counts appear inflated or alerts fire continuously, increase `capacity` values and `sustained_density_threshold` to match your model's actual output density scale.
+**Tuning note:** Thresholds were calibrated against observed smoothed density values (0.010–0.018 range for this scene). If your video produces different density ranges, adjust `sustained_density_threshold` and the `roc` thresholds accordingly by printing the smoothed density values during a first run.
 
 ---
 
@@ -174,12 +174,12 @@ huggingface_hub
 ## Notes
 
 - **Camera angle:** Overhead or high-angle fixed cameras work best. Perspective-view cameras introduce depth distortion that inflates density estimates for distant regions.
-- **Model weights:** Default weights are trained on ShanghaiTech Part B (sparse scenes). For dense crowds, Part A weights give better calibrated counts.
+- **Model weights:** Default weights are from `rootstrap-org/crowd-counting` trained on ShanghaiTech Part B (sparse scenes). For dense crowds, Part A weights give better calibrated absolute counts.
 - **Device targeting:** Change `DEVICE = "AUTO"` in `main.py` to `"CPU"`, `"GPU"`, or `"NPU"` to target specific Intel hardware.
+- **Count scale:** With Part B weights on a dense scene, absolute counts will be inflated. The relative density distribution across zones is spatially correct and the temporal signals behave as expected.
 
 ---
 
 ## Author
 
 Arunima Surendran
-# crowd-density
